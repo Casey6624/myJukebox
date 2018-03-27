@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace myJukebox
 {
@@ -22,6 +23,13 @@ namespace myJukebox
             // Assigns the aboutForm to a variable and shows the form when About Menu Item selected
             aboutForm aboutForm = new aboutForm();
             aboutForm.ShowDialog();
+        }
+
+        private void setUpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Assigns the aboutForm to a variable and shows the form when About Menu Item selected
+            setupForm setupForm = new setupForm();
+            setupForm.ShowDialog();
         }
     }
 }

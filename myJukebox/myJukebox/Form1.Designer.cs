@@ -37,7 +37,9 @@
             this.txtPresentlyPlaying = new System.Windows.Forms.TextBox();
             this.txtPlaylist = new System.Windows.Forms.TextBox();
             this.lblCopyright = new System.Windows.Forms.Label();
+            this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -57,6 +59,7 @@
             this.setUpToolStripMenuItem.Name = "setUpToolStripMenuItem";
             this.setUpToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
             this.setUpToolStripMenuItem.Text = "Set Up";
+            this.setUpToolStripMenuItem.Click += new System.EventHandler(this.setUpToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -77,26 +80,28 @@
             // lstboxGenreList
             // 
             this.lstboxGenreList.FormattingEnabled = true;
+            this.lstboxGenreList.HorizontalExtent = 3;
             this.lstboxGenreList.HorizontalScrollbar = true;
             this.lstboxGenreList.Location = new System.Drawing.Point(135, 207);
             this.lstboxGenreList.Name = "lstboxGenreList";
             this.lstboxGenreList.ScrollAlwaysVisible = true;
+            this.lstboxGenreList.SelectionMode = System.Windows.Forms.SelectionMode.None;
             this.lstboxGenreList.Size = new System.Drawing.Size(209, 82);
             this.lstboxGenreList.TabIndex = 2;
             // 
             // txtPresentlyPlaying
             // 
             this.txtPresentlyPlaying.BackColor = System.Drawing.Color.Lime;
-            this.txtPresentlyPlaying.Location = new System.Drawing.Point(118, 321);
+            this.txtPresentlyPlaying.Location = new System.Drawing.Point(117, 321);
             this.txtPresentlyPlaying.Name = "txtPresentlyPlaying";
             this.txtPresentlyPlaying.ReadOnly = true;
-            this.txtPresentlyPlaying.Size = new System.Drawing.Size(237, 20);
+            this.txtPresentlyPlaying.Size = new System.Drawing.Size(246, 20);
             this.txtPresentlyPlaying.TabIndex = 3;
             // 
             // txtPlaylist
             // 
             this.txtPlaylist.BackColor = System.Drawing.Color.Khaki;
-            this.txtPlaylist.Location = new System.Drawing.Point(157, 347);
+            this.txtPlaylist.Location = new System.Drawing.Point(157, 341);
             this.txtPlaylist.Multiline = true;
             this.txtPlaylist.Name = "txtPlaylist";
             this.txtPlaylist.ReadOnly = true;
@@ -112,6 +117,15 @@
             this.lblCopyright.TabIndex = 5;
             this.lblCopyright.Text = "Copyright © 2018. Casey Smith";
             // 
+            // axWindowsMediaPlayer1
+            // 
+            this.axWindowsMediaPlayer1.Enabled = true;
+            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(169, 602);
+            this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
+            this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
+            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(145, 37);
+            this.axWindowsMediaPlayer1.TabIndex = 6;
+            // 
             // myJukeboxMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -119,6 +133,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(484, 730);
+            this.Controls.Add(this.axWindowsMediaPlayer1);
             this.Controls.Add(this.lblCopyright);
             this.Controls.Add(this.txtPlaylist);
             this.Controls.Add(this.txtPresentlyPlaying);
@@ -131,6 +146,7 @@
             this.Text = "My Juke Box v1.0";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -146,6 +162,7 @@
         private System.Windows.Forms.TextBox txtPresentlyPlaying;
         private System.Windows.Forms.TextBox txtPlaylist;
         private System.Windows.Forms.Label lblCopyright;
+        private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
     }
 }
 
