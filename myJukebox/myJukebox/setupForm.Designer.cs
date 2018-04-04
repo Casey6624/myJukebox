@@ -29,19 +29,19 @@
         private void InitializeComponent()
         {
             this.groupBoxImported = new System.Windows.Forms.GroupBox();
-            this.lstBoxImportedTracks = new System.Windows.Forms.ListBox();
+            this.btnClearImportTracks = new System.Windows.Forms.Button();
             this.btnImportFromDirectory = new System.Windows.Forms.Button();
+            this.lstBoxImportedTracks = new System.Windows.Forms.ListBox();
             this.btnCopyTrack = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lstBoxCurrentTracks = new System.Windows.Forms.ListBox();
-            this.txtGeneraTitle = new System.Windows.Forms.TextBox();
-            this.lblGeneraTitle = new System.Windows.Forms.Label();
-            this.btnPrevious = new System.Windows.Forms.Button();
-            this.btnNext = new System.Windows.Forms.Button();
-            this.btnAdd = new System.Windows.Forms.Button();
             this.btnDel = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnNext = new System.Windows.Forms.Button();
+            this.btnPrevious = new System.Windows.Forms.Button();
+            this.lblGeneraTitle = new System.Windows.Forms.Label();
+            this.txtGeneraTitle = new System.Windows.Forms.TextBox();
+            this.lstBoxCurrentTracks = new System.Windows.Forms.ListBox();
             this.btnOK = new System.Windows.Forms.Button();
-            this.btnClearImportTracks = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnMoveTrack = new System.Windows.Forms.Button();
             this.btnDelFromGenera = new System.Windows.Forms.Button();
@@ -61,13 +61,14 @@
             this.groupBoxImported.TabStop = false;
             this.groupBoxImported.Text = "Imported Tracks";
             // 
-            // lstBoxImportedTracks
+            // btnClearImportTracks
             // 
-            this.lstBoxImportedTracks.FormattingEnabled = true;
-            this.lstBoxImportedTracks.Location = new System.Drawing.Point(7, 20);
-            this.lstBoxImportedTracks.Name = "lstBoxImportedTracks";
-            this.lstBoxImportedTracks.Size = new System.Drawing.Size(291, 264);
-            this.lstBoxImportedTracks.TabIndex = 0;
+            this.btnClearImportTracks.Location = new System.Drawing.Point(7, 320);
+            this.btnClearImportTracks.Name = "btnClearImportTracks";
+            this.btnClearImportTracks.Size = new System.Drawing.Size(291, 23);
+            this.btnClearImportTracks.TabIndex = 2;
+            this.btnClearImportTracks.Text = "Clear Import Tracks";
+            this.btnClearImportTracks.UseVisualStyleBackColor = true;
             // 
             // btnImportFromDirectory
             // 
@@ -77,6 +78,15 @@
             this.btnImportFromDirectory.TabIndex = 1;
             this.btnImportFromDirectory.Text = "Import From Directory";
             this.btnImportFromDirectory.UseVisualStyleBackColor = true;
+            this.btnImportFromDirectory.Click += new System.EventHandler(this.btnImportFromDirectory_Click);
+            // 
+            // lstBoxImportedTracks
+            // 
+            this.lstBoxImportedTracks.FormattingEnabled = true;
+            this.lstBoxImportedTracks.Location = new System.Drawing.Point(7, 20);
+            this.lstBoxImportedTracks.Name = "lstBoxImportedTracks";
+            this.lstBoxImportedTracks.Size = new System.Drawing.Size(291, 264);
+            this.lstBoxImportedTracks.TabIndex = 0;
             // 
             // btnCopyTrack
             // 
@@ -103,47 +113,14 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Present Genre Track List";
             // 
-            // lstBoxCurrentTracks
+            // btnDel
             // 
-            this.lstBoxCurrentTracks.FormattingEnabled = true;
-            this.lstBoxCurrentTracks.Location = new System.Drawing.Point(19, 63);
-            this.lstBoxCurrentTracks.Name = "lstBoxCurrentTracks";
-            this.lstBoxCurrentTracks.Size = new System.Drawing.Size(242, 212);
-            this.lstBoxCurrentTracks.TabIndex = 0;
-            // 
-            // txtGeneraTitle
-            // 
-            this.txtGeneraTitle.Location = new System.Drawing.Point(19, 33);
-            this.txtGeneraTitle.Name = "txtGeneraTitle";
-            this.txtGeneraTitle.Size = new System.Drawing.Size(242, 20);
-            this.txtGeneraTitle.TabIndex = 1;
-            // 
-            // lblGeneraTitle
-            // 
-            this.lblGeneraTitle.AutoSize = true;
-            this.lblGeneraTitle.Location = new System.Drawing.Point(16, 17);
-            this.lblGeneraTitle.Name = "lblGeneraTitle";
-            this.lblGeneraTitle.Size = new System.Drawing.Size(65, 13);
-            this.lblGeneraTitle.TabIndex = 2;
-            this.lblGeneraTitle.Text = "Genera Title";
-            // 
-            // btnPrevious
-            // 
-            this.btnPrevious.Location = new System.Drawing.Point(19, 290);
-            this.btnPrevious.Name = "btnPrevious";
-            this.btnPrevious.Size = new System.Drawing.Size(81, 54);
-            this.btnPrevious.TabIndex = 3;
-            this.btnPrevious.Text = "<< Previous";
-            this.btnPrevious.UseVisualStyleBackColor = true;
-            // 
-            // btnNext
-            // 
-            this.btnNext.Location = new System.Drawing.Point(180, 290);
-            this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(81, 54);
-            this.btnNext.TabIndex = 4;
-            this.btnNext.Text = "Next >>";
-            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnDel.Location = new System.Drawing.Point(108, 321);
+            this.btnDel.Name = "btnDel";
+            this.btnDel.Size = new System.Drawing.Size(66, 24);
+            this.btnDel.TabIndex = 6;
+            this.btnDel.Text = "Delete";
+            this.btnDel.UseVisualStyleBackColor = true;
             // 
             // btnAdd
             // 
@@ -154,14 +131,47 @@
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
             // 
-            // btnDel
+            // btnNext
             // 
-            this.btnDel.Location = new System.Drawing.Point(108, 321);
-            this.btnDel.Name = "btnDel";
-            this.btnDel.Size = new System.Drawing.Size(66, 24);
-            this.btnDel.TabIndex = 6;
-            this.btnDel.Text = "Delete";
-            this.btnDel.UseVisualStyleBackColor = true;
+            this.btnNext.Location = new System.Drawing.Point(180, 290);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(81, 54);
+            this.btnNext.TabIndex = 4;
+            this.btnNext.Text = "Next >>";
+            this.btnNext.UseVisualStyleBackColor = true;
+            // 
+            // btnPrevious
+            // 
+            this.btnPrevious.Location = new System.Drawing.Point(19, 290);
+            this.btnPrevious.Name = "btnPrevious";
+            this.btnPrevious.Size = new System.Drawing.Size(81, 54);
+            this.btnPrevious.TabIndex = 3;
+            this.btnPrevious.Text = "<< Previous";
+            this.btnPrevious.UseVisualStyleBackColor = true;
+            // 
+            // lblGeneraTitle
+            // 
+            this.lblGeneraTitle.AutoSize = true;
+            this.lblGeneraTitle.Location = new System.Drawing.Point(16, 17);
+            this.lblGeneraTitle.Name = "lblGeneraTitle";
+            this.lblGeneraTitle.Size = new System.Drawing.Size(65, 13);
+            this.lblGeneraTitle.TabIndex = 2;
+            this.lblGeneraTitle.Text = "Genera Title";
+            // 
+            // txtGeneraTitle
+            // 
+            this.txtGeneraTitle.Location = new System.Drawing.Point(19, 33);
+            this.txtGeneraTitle.Name = "txtGeneraTitle";
+            this.txtGeneraTitle.Size = new System.Drawing.Size(242, 20);
+            this.txtGeneraTitle.TabIndex = 1;
+            // 
+            // lstBoxCurrentTracks
+            // 
+            this.lstBoxCurrentTracks.FormattingEnabled = true;
+            this.lstBoxCurrentTracks.Location = new System.Drawing.Point(19, 63);
+            this.lstBoxCurrentTracks.Name = "lstBoxCurrentTracks";
+            this.lstBoxCurrentTracks.Size = new System.Drawing.Size(242, 212);
+            this.lstBoxCurrentTracks.TabIndex = 0;
             // 
             // btnOK
             // 
@@ -171,15 +181,6 @@
             this.btnOK.TabIndex = 3;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
-            // 
-            // btnClearImportTracks
-            // 
-            this.btnClearImportTracks.Location = new System.Drawing.Point(7, 320);
-            this.btnClearImportTracks.Name = "btnClearImportTracks";
-            this.btnClearImportTracks.Size = new System.Drawing.Size(291, 23);
-            this.btnClearImportTracks.TabIndex = 2;
-            this.btnClearImportTracks.Text = "Clear Import Tracks";
-            this.btnClearImportTracks.UseVisualStyleBackColor = true;
             // 
             // btnCancel
             // 
