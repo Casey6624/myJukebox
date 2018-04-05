@@ -89,7 +89,6 @@
             this.lstboxGenreList.MultiColumn = true;
             this.lstboxGenreList.Name = "lstboxGenreList";
             this.lstboxGenreList.ScrollAlwaysVisible = true;
-            this.lstboxGenreList.SelectionMode = System.Windows.Forms.SelectionMode.None;
             this.lstboxGenreList.Size = new System.Drawing.Size(209, 82);
             this.lstboxGenreList.TabIndex = 2;
             this.lstboxGenreList.SelectedIndexChanged += new System.EventHandler(this.lstboxGenreList_SelectedIndexChanged);
