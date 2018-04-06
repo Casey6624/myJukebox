@@ -42,6 +42,8 @@
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.listBox3 = new System.Windows.Forms.ListBox();
             this.txtPlayingFilePath = new System.Windows.Forms.TextBox();
+            this.btnNextGenre = new System.Windows.Forms.Button();
+            this.btnPrevGenre = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
             this.SuspendLayout();
@@ -85,6 +87,7 @@
             // 
             this.lstboxGenreList.DisplayMember = "Name";
             this.lstboxGenreList.FormattingEnabled = true;
+            this.lstboxGenreList.HorizontalExtent = 100000;
             this.lstboxGenreList.HorizontalScrollbar = true;
             this.lstboxGenreList.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.lstboxGenreList.Location = new System.Drawing.Point(135, 207);
@@ -94,7 +97,7 @@
             this.lstboxGenreList.Size = new System.Drawing.Size(209, 82);
             this.lstboxGenreList.TabIndex = 2;
             this.lstboxGenreList.ValueMember = "Tracks";
-            this.lstboxGenreList.Click += new System.EventHandler(this.lstboxGenreList_Click);
+            this.lstboxGenreList.DoubleClick += new System.EventHandler(this.lstboxGenreList_DoubleClick);
             // 
             // txtPresentlyPlaying
             // 
@@ -168,6 +171,25 @@
             this.txtPlayingFilePath.Size = new System.Drawing.Size(460, 20);
             this.txtPlayingFilePath.TabIndex = 10;
             // 
+            // btnNextGenre
+            // 
+            this.btnNextGenre.Location = new System.Drawing.Point(314, 266);
+            this.btnNextGenre.Name = "btnNextGenre";
+            this.btnNextGenre.Size = new System.Drawing.Size(30, 23);
+            this.btnNextGenre.TabIndex = 11;
+            this.btnNextGenre.Text = ">";
+            this.btnNextGenre.UseVisualStyleBackColor = true;
+            this.btnNextGenre.Click += new System.EventHandler(this.btnNextGenre_Click);
+            // 
+            // btnPrevGenre
+            // 
+            this.btnPrevGenre.Location = new System.Drawing.Point(135, 266);
+            this.btnPrevGenre.Name = "btnPrevGenre";
+            this.btnPrevGenre.Size = new System.Drawing.Size(30, 23);
+            this.btnPrevGenre.TabIndex = 12;
+            this.btnPrevGenre.Text = "<";
+            this.btnPrevGenre.UseVisualStyleBackColor = true;
+            // 
             // myJukeboxMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -175,6 +197,8 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(484, 730);
+            this.Controls.Add(this.btnPrevGenre);
+            this.Controls.Add(this.btnNextGenre);
             this.Controls.Add(this.txtPlayingFilePath);
             this.Controls.Add(this.listBox3);
             this.Controls.Add(this.listBox2);
@@ -213,6 +237,8 @@
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.ListBox listBox3;
         private System.Windows.Forms.TextBox txtPlayingFilePath;
+        private System.Windows.Forms.Button btnNextGenre;
+        private System.Windows.Forms.Button btnPrevGenre;
     }
 }
 

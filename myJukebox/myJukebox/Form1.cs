@@ -78,7 +78,6 @@ namespace myJukebox
             listMediaContents.RemoveRange(0, tracksInGenre + 1);
             // Test listbox to see what is inside the list
             listBox3.DataSource = listGenre3;
-
             // Takes the genre name which is [0] in each list and adds them to their own list and then removes them from the list with the tracks
             genreNames.Add(listGenre1[0]);
             listGenre1.RemoveAt(0);
@@ -86,17 +85,19 @@ namespace myJukebox
             listGenre2.RemoveAt(0);
             genreNames.Add(listGenre3[0]);
             listGenre3.RemoveAt(0);
+            int genreIndex = 0;
             // Sets the genretitle text to the name of the genre
-            txtGenreTitle.Text = genreNames[0];
+            txtGenreTitle.Text = genreNames[genreIndex];
 
             allGenres.Add(listGenre1);
             allGenres.Add(listGenre2);
             allGenres.Add(listGenre3);
 
-            int currentGenre = 0;
-            lstboxGenreList.DataSource = allGenres[currentGenre];
-            string trackName = Convert.ToString(lstboxGenreList.SelectedItem); ;
-
+            lstboxGenreList.DataSource = allGenres[genreIndex];
+            string trackName = "";
+            
+            // Code to play the tracks
+            // new string audio path combines the directory and the track name which is selected from the listbox
             string audioFilePath = Path.Combine(StrApplicationTracksPath, trackName);
             axWindowsMediaPlayer1.URL = audioFilePath;
             txtPlayingFilePath.Text = audioFilePath;
@@ -110,6 +111,10 @@ namespace myJukebox
         public int int_Number_of_Genre;
         private object allGenres;
         private object genreNames;
+
+        public string trackName { get; private set; }
+        public int genreIndex { get; private set; }
+        public int numOfGenre { get; private set; }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -125,9 +130,29 @@ namespace myJukebox
             setupForm.ShowDialog();
         }
 
-        private void lstboxGenreList_Click(object sender, EventArgs e)
+        private void lstboxGenreList_DoubleClick(object sender, EventArgs e)
         {
+            trackName = lstboxGenreList.SelectedItem.ToString();
+            string audioFilePath = Path.Combine(StrApplicationTracksPath, trackName);
+            axWindowsMediaPlayer1.URL = audioFilePath;
+            txtPlayingFilePath.Text = audioFilePath;
+        }
+
+        private void btnNextGenre_Click(object sender, EventArgs e)
+        {
+            if(genreIndex < numOfGenre)
+            {
+                genreIndex = genreIndex + 1;
+               
+            }
+            else
+            {
+                btnNextGenre.Enabled = false;
+            }
+            MessageBox.Show("genreIndex: " + genreIndex + " numOfGenre " + numOfGenre);
             
+
+
         }
     }
 }
