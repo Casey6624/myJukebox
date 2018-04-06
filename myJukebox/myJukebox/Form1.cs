@@ -92,17 +92,24 @@ namespace myJukebox
             allGenres.Add(listGenre1);
             allGenres.Add(listGenre2);
             allGenres.Add(listGenre3);
-            lstboxGenreList.DataSource = allGenres[0];  
-                
+
+            int currentGenre = 0;
+            lstboxGenreList.DataSource = allGenres[currentGenre];
+            string trackName = Convert.ToString(lstboxGenreList.SelectedItem); ;
+
+            string audioFilePath = Path.Combine(StrApplicationTracksPath, trackName);
+            axWindowsMediaPlayer1.URL = audioFilePath;
+            txtPlayingFilePath.Text = audioFilePath;
         }
 
         // the path of the media files
         public static string StrApplicationMediaPath = Directory.GetCurrentDirectory() + "\\Media\\Media.txt";
         // the path of the config file
-        public string StrApplicationTracksPath = Directory.GetCurrentDirectory() + "\\Tracks";
+        public string StrApplicationTracksPath = Directory.GetCurrentDirectory() + "\\Tracks\\";
         // the number of generes in the config file
         public int int_Number_of_Genre;
         private object allGenres;
+        private object genreNames;
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -117,10 +124,10 @@ namespace myJukebox
             setupForm setupForm = new setupForm();
             setupForm.ShowDialog();
         }
-        private void lstboxGenreList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            lstboxGenreList.DataSource = allGenres;
-        }
 
+        private void lstboxGenreList_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

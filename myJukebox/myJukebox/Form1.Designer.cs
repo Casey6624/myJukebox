@@ -41,6 +41,7 @@
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.listBox3 = new System.Windows.Forms.ListBox();
+            this.txtPlayingFilePath = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
             this.SuspendLayout();
@@ -82,6 +83,7 @@
             // 
             // lstboxGenreList
             // 
+            this.lstboxGenreList.DisplayMember = "Name";
             this.lstboxGenreList.FormattingEnabled = true;
             this.lstboxGenreList.HorizontalScrollbar = true;
             this.lstboxGenreList.ImeMode = System.Windows.Forms.ImeMode.NoControl;
@@ -91,7 +93,8 @@
             this.lstboxGenreList.ScrollAlwaysVisible = true;
             this.lstboxGenreList.Size = new System.Drawing.Size(209, 82);
             this.lstboxGenreList.TabIndex = 2;
-            this.lstboxGenreList.SelectedIndexChanged += new System.EventHandler(this.lstboxGenreList_SelectedIndexChanged);
+            this.lstboxGenreList.ValueMember = "Tracks";
+            this.lstboxGenreList.Click += new System.EventHandler(this.lstboxGenreList_Click);
             // 
             // txtPresentlyPlaying
             // 
@@ -132,9 +135,13 @@
             // 
             // listBox1
             // 
+            this.listBox1.ColumnWidth = 3;
             this.listBox1.FormattingEnabled = true;
+            this.listBox1.HorizontalScrollbar = true;
             this.listBox1.Location = new System.Drawing.Point(13, 38);
+            this.listBox1.MultiColumn = true;
             this.listBox1.Name = "listBox1";
+            this.listBox1.ScrollAlwaysVisible = true;
             this.listBox1.Size = new System.Drawing.Size(120, 95);
             this.listBox1.TabIndex = 7;
             // 
@@ -154,6 +161,13 @@
             this.listBox3.Size = new System.Drawing.Size(120, 95);
             this.listBox3.TabIndex = 9;
             // 
+            // txtPlayingFilePath
+            // 
+            this.txtPlayingFilePath.Location = new System.Drawing.Point(12, 683);
+            this.txtPlayingFilePath.Name = "txtPlayingFilePath";
+            this.txtPlayingFilePath.Size = new System.Drawing.Size(460, 20);
+            this.txtPlayingFilePath.TabIndex = 10;
+            // 
             // myJukeboxMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -161,6 +175,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(484, 730);
+            this.Controls.Add(this.txtPlayingFilePath);
             this.Controls.Add(this.listBox3);
             this.Controls.Add(this.listBox2);
             this.Controls.Add(this.listBox1);
@@ -197,6 +212,7 @@
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.ListBox listBox3;
+        private System.Windows.Forms.TextBox txtPlayingFilePath;
     }
 }
 
