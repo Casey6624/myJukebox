@@ -28,15 +28,17 @@ namespace myJukebox
         // genre titles are not posting in lstboxGenreList
         List<string> listMediaContents = new List<string>();
         List<string> listGenreNameAndTracks = new List<string>();
-        List<List<string>> Media_Libary = new List<List<string>>();
+
         List<string> newgenrelist = new List<string>();
 
-        public void readMediaFile()
+        public List<List<string>> Media_Libary()
         {
+            List<List<string>> Media_Libary = new List<List<string>>();
+
             StreamReader MediaFile_StreamReader = File.OpenText(StrApplicationMediaPath);
             line_of_text = MediaFile_StreamReader.ReadLine();
             // Read the file and store to list until line_of_text returns null (no more lines)
-            while( line_of_text != null)
+            while (line_of_text != null)
             {
                 // Adds each line to the listMediaContents file
                 listMediaContents.Add(line_of_text);
@@ -54,10 +56,10 @@ namespace myJukebox
                 {
                     List<string> newgenrelist = new List<string>();
                     // Code to work out the amount of tracks in the genre by reading the 2nd line after the amount of genres in total
-                    int tracksInGenre = Convert.ToInt16(listMediaContents[0]); 
+                    int tracksInGenre = Convert.ToInt16(listMediaContents[0]);
                     // then deletes the amount of tracks once it's stored to a variable 
                     listMediaContents.RemoveAt(0);
-                    for(int count2 = 0; count2 < tracksInGenre; count2++)
+                    for (int count2 = 0; count2 < tracksInGenre; count2++)
                     {
                         // Adds the tracks to a list by using a get range (+1 is for the genre name)
                         //newgenrelist.Add(listMediaContents.GetRange(0, tracksInGenre + 1));
@@ -69,12 +71,14 @@ namespace myJukebox
                     lstboxGenreList.DataSource = Media_Libary[0];
                 }
             }
+            return (Media_Libary);
         }
+    
 
         public myJukeboxMainForm()
         {
             InitializeComponent();
-            readMediaFile();
+            Media_Libary();
         }
         public bool queuedTracks()
         {
