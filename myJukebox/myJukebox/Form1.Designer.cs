@@ -163,9 +163,9 @@
             // 
             // btnNextGenre
             // 
-            this.btnNextGenre.Location = new System.Drawing.Point(314, 266);
+            this.btnNextGenre.Location = new System.Drawing.Point(323, 266);
             this.btnNextGenre.Name = "btnNextGenre";
-            this.btnNextGenre.Size = new System.Drawing.Size(30, 23);
+            this.btnNextGenre.Size = new System.Drawing.Size(22, 23);
             this.btnNextGenre.TabIndex = 11;
             this.btnNextGenre.Text = ">";
             this.btnNextGenre.UseVisualStyleBackColor = true;
@@ -175,7 +175,7 @@
             // 
             this.btnPrevGenre.Location = new System.Drawing.Point(135, 266);
             this.btnPrevGenre.Name = "btnPrevGenre";
-            this.btnPrevGenre.Size = new System.Drawing.Size(30, 23);
+            this.btnPrevGenre.Size = new System.Drawing.Size(22, 23);
             this.btnPrevGenre.TabIndex = 12;
             this.btnPrevGenre.Text = "<";
             this.btnPrevGenre.UseVisualStyleBackColor = true;

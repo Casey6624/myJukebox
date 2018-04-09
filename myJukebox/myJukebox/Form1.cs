@@ -13,7 +13,6 @@ namespace myJukebox
 {
     public partial class myJukeboxMainForm : Form
     {
-        private ListBox[] Media_Libary;
         string trackName = "";
         // status of playing music
         bool IsPlaying = false;
@@ -29,6 +28,8 @@ namespace myJukebox
         // genre titles are not posting in lstboxGenreList
         List<string> listMediaContents = new List<string>();
         List<string> listGenreNameAndTracks = new List<string>();
+        List<List<string>> Media_Libary = new List<List<string>>();
+        List<string> newgenrelist = new List<string>();
 
         public void readMediaFile()
         {
@@ -47,24 +48,25 @@ namespace myJukebox
             int_Number_of_Genre = Convert.ToInt16(listMediaContents[0]);
             listMediaContents.RemoveAt(0);
             // if there is more than one genre
-            if (int_Number_of_Genre > 1)
+            if (int_Number_of_Genre >= 1)
             {
-                Media_Libary = new ListBox[int_Number_of_Genre];
-                MessageBox.Show(listMediaContents[0]);
                 for (int count = 0; count < int_Number_of_Genre; count++)
                 {
-                    Media_Libary[count] = new ListBox();
-                    string readTracksInGenre = listMediaContents[0];
+                    List<string> newgenrelist = new List<string>();
                     // Code to work out the amount of tracks in the genre by reading the 2nd line after the amount of genres in total
-                    int tracksInGenre = Convert.ToInt16(readTracksInGenre);
+                    int tracksInGenre = Convert.ToInt16(listMediaContents[0]); 
                     // then deletes the amount of tracks once it's stored to a variable 
                     listMediaContents.RemoveAt(0);
-                    // Adds the tracks to a list by using a get range (+1 is for the genre name)
-                    Media_Libary[0].Items.Add(listMediaContents.GetRange(0, tracksInGenre + 1));
+                    for(int count2 = 0; count2 < tracksInGenre; count2++)
+                    {
+                        // Adds the tracks to a list by using a get range (+1 is for the genre name)
+                        //newgenrelist.Add(listMediaContents.GetRange(0, tracksInGenre + 1));
+                        newgenrelist.InsertRange(0, listMediaContents);
+                    }
                     // Similar line of code to remove the tracks and title from the list so we can get the next genre info
                     listMediaContents.RemoveRange(0, tracksInGenre + 1);
-                    // Test listbox to see what is inside the list
-                    listBox1.DataSource = Media_Libary;
+                    Media_Libary.Add(newgenrelist);
+                    lstboxGenreList.DataSource = Media_Libary[0];
                 }
             }
         }
@@ -120,6 +122,10 @@ namespace myJukebox
 
         private void lstboxGenreList_DoubleClick(object sender, EventArgs e)
         {
+            MessageBox.Show(Convert.ToString(lstboxGenreList.Items[0])); 
+           
+
+           
 
         }
 
