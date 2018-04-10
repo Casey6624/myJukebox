@@ -30,7 +30,8 @@ namespace myJukebox
         List<string> listMediaContents = new List<string>();
         List<List<string>> Media_Libary = new List<List<string>>();
         List<string> newgenrelist = new List<string>();
-        
+        List<string> genreTitle = new List<string>();
+
 
         public void readMediaFile(int genreIndex)
         {
@@ -70,6 +71,12 @@ namespace myJukebox
                     listMediaContents.RemoveRange(0, tracksInGenre + 1);     
                 }
                 lstboxGenreList.DataSource = Media_Libary[genreIndex];
+                foreach(string title in Media_Libary[genreIndex])
+                {
+                    genreTitle.Add(title);
+                    txtGenreTitle.Text = genreTitle[0];
+                }
+                genreTitle.Clear();
             }
         }
     
@@ -139,6 +146,7 @@ namespace myJukebox
                 genreIndex++;
                 readMediaFile(genreIndex);
                 btnPrevGenre.Enabled = true;
+                genreTitle.Clear();
             }
             else
             {
@@ -154,6 +162,7 @@ namespace myJukebox
                 genreIndex--;
                 readMediaFile(genreIndex);
                 btnNextGenre.Enabled = true;
+                genreTitle.Clear();
             }
             else
             {
