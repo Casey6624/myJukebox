@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using WMPLib;
 
 namespace myJukebox
 {
@@ -15,6 +16,7 @@ namespace myJukebox
     {
         public int genreIndex = 0;
         string trackName = "";
+        public Timer timer1;
         // status of playing music
         bool IsPlaying = false;
         // line_of_text pulls defined which is used with the StreamReader to read the media file
@@ -32,7 +34,7 @@ namespace myJukebox
         List<string> newgenrelist = new List<string>();
         List<string> genreTitle = new List<string>();
 
-
+       
         public void readMediaFile(int genreIndex)
         {
             List<List<string>> Media_Libary = new List<List<string>>();
@@ -60,8 +62,7 @@ namespace myJukebox
                     // Code to work out the amount of tracks in the genre by reading the 2nd line after the amount of genres in total
                     int tracksInGenre = Convert.ToInt16(listMediaContents[0]);
                     // then deletes the amount of tracks once it's stored to a variable 
-                    listMediaContents.RemoveAt(0);
-                    
+                    listMediaContents.RemoveAt(0);                   
                         // Adds the tracks to a list by using a get range (+1 is for the genre name)
                         newgenrelist.AddRange(listMediaContents.GetRange(0, tracksInGenre + 1));
                         //newgenrelist.InsertRange(0, listMediaContents);
@@ -80,8 +81,6 @@ namespace myJukebox
                 genreTitle.Clear();
             }
         }
-    
-
         public myJukeboxMainForm()
         {
             InitializeComponent();
@@ -98,6 +97,22 @@ namespace myJukebox
                 return false;
             }
         }
+        private void checkCurrentPlayStatus()
+        {
+            if (axWindowsMediaPlayer1.playState == WMPPlayState.wmppsPlaying)
+            {
+                IsPlaying = true;
+            }
+            else if (axWindowsMediaPlayer1.playState == WMPPlayState.wmppsMediaEnded)
+            {
+                IsPlaying = false;
+                timer1.Interval = 100;
+                timer1.Enabled = true;
+                queueAndPlay();
+            }
+        }
+
+
         public void queueAndPlay()
         {
             if(queuedTracks() == true || IsPlaying == true)
@@ -105,16 +120,28 @@ namespace myJukebox
                 trackName = lstboxGenreList.SelectedItem.ToString();
                 lstboxPlaylist.Items.Add(trackName);
             }
+            else if(queuedTracks() == true && IsPlaying == false)
+            {
+                trackName = Convert.ToString(lstboxPlaylist.GetItemText(0));
+                lstboxPlaylist.Items.RemoveAt(0);
+            }
             else
             {
-                IsPlaying = true;
                 trackName = lstboxGenreList.SelectedItem.ToString();
                 string audioFilePath = Path.Combine(StrApplicationTracksPath, trackName);
                 axWindowsMediaPlayer1.URL = audioFilePath;
-                txtPlayingFilePath.Text = audioFilePath;
                 txtPresentlyPlaying.Text = trackName;
             }
         }
+        private void axWindowsMediaPlayer1_PlayStateChange(object sender, AxWMPLib._WMPOCXEvents_PlayStateChangeEvent e)
+        {
+            if ((WMPLib.WMPPlayState)e.newState == WMPLib.WMPPlayState.wmppsMediaEnded)
+            {
+                IsPlaying = false;
+                queueAndPlay();
+            }
+        }
+
         // Used MSDN Microsoft Article for help https://msdn.microsoft.com/en-us/library/windows/desktop/dd562692(v=vs.85).aspx 
         private void Player_MediaError(object pMediaObject)
         {
@@ -122,7 +149,7 @@ namespace myJukebox
             this.Close();
         }
 
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+            private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Assigns the aboutForm to a variable and shows the form when About Menu Item selected
             aboutForm aboutForm = new aboutForm();
@@ -139,7 +166,16 @@ namespace myJukebox
 
         private void lstboxGenreList_DoubleClick(object sender, EventArgs e)
         {
-            queueAndPlay();    
+            checkCurrentPlayStatus();
+            if(IsPlaying == true)
+            {
+                queueAndPlay();
+            }
+            else
+            {
+                queueAndPlay();
+            }
+                
         }
 
         private void btnNextGenre_Click(object sender, EventArgs e)

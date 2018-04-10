@@ -37,10 +37,6 @@
             this.txtPresentlyPlaying = new System.Windows.Forms.TextBox();
             this.lblCopyright = new System.Windows.Forms.Label();
             this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.listBox2 = new System.Windows.Forms.ListBox();
-            this.listBox3 = new System.Windows.Forms.ListBox();
-            this.txtPlayingFilePath = new System.Windows.Forms.TextBox();
             this.btnNextGenre = new System.Windows.Forms.Button();
             this.btnPrevGenre = new System.Windows.Forms.Button();
             this.lstboxPlaylist = new System.Windows.Forms.ListBox();
@@ -102,7 +98,7 @@
             // txtPresentlyPlaying
             // 
             this.txtPresentlyPlaying.BackColor = System.Drawing.Color.Lime;
-            this.txtPresentlyPlaying.Location = new System.Drawing.Point(117, 321);
+            this.txtPresentlyPlaying.Location = new System.Drawing.Point(116, 295);
             this.txtPresentlyPlaying.Name = "txtPresentlyPlaying";
             this.txtPresentlyPlaying.ReadOnly = true;
             this.txtPresentlyPlaying.Size = new System.Drawing.Size(246, 20);
@@ -125,41 +121,7 @@
             this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
             this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(145, 37);
             this.axWindowsMediaPlayer1.TabIndex = 6;
-            // 
-            // listBox1
-            // 
-            this.listBox1.ColumnWidth = 3;
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.HorizontalScrollbar = true;
-            this.listBox1.Location = new System.Drawing.Point(13, 38);
-            this.listBox1.MultiColumn = true;
-            this.listBox1.Name = "listBox1";
-            this.listBox1.ScrollAlwaysVisible = true;
-            this.listBox1.Size = new System.Drawing.Size(120, 95);
-            this.listBox1.TabIndex = 7;
-            // 
-            // listBox2
-            // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.Location = new System.Drawing.Point(169, 38);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(120, 95);
-            this.listBox2.TabIndex = 8;
-            // 
-            // listBox3
-            // 
-            this.listBox3.FormattingEnabled = true;
-            this.listBox3.Location = new System.Drawing.Point(323, 38);
-            this.listBox3.Name = "listBox3";
-            this.listBox3.Size = new System.Drawing.Size(120, 95);
-            this.listBox3.TabIndex = 9;
-            // 
-            // txtPlayingFilePath
-            // 
-            this.txtPlayingFilePath.Location = new System.Drawing.Point(12, 683);
-            this.txtPlayingFilePath.Name = "txtPlayingFilePath";
-            this.txtPlayingFilePath.Size = new System.Drawing.Size(460, 20);
-            this.txtPlayingFilePath.TabIndex = 10;
+            this.axWindowsMediaPlayer1.Visible = false;
             // 
             // btnNextGenre
             // 
@@ -185,9 +147,9 @@
             // 
             this.lstboxPlaylist.BackColor = System.Drawing.Color.Bisque;
             this.lstboxPlaylist.FormattingEnabled = true;
-            this.lstboxPlaylist.Location = new System.Drawing.Point(156, 341);
+            this.lstboxPlaylist.Location = new System.Drawing.Point(135, 331);
             this.lstboxPlaylist.Name = "lstboxPlaylist";
-            this.lstboxPlaylist.Size = new System.Drawing.Size(169, 121);
+            this.lstboxPlaylist.Size = new System.Drawing.Size(209, 147);
             this.lstboxPlaylist.TabIndex = 13;
             // 
             // myJukeboxMainForm
@@ -200,10 +162,6 @@
             this.Controls.Add(this.lstboxPlaylist);
             this.Controls.Add(this.btnPrevGenre);
             this.Controls.Add(this.btnNextGenre);
-            this.Controls.Add(this.txtPlayingFilePath);
-            this.Controls.Add(this.listBox3);
-            this.Controls.Add(this.listBox2);
-            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.axWindowsMediaPlayer1);
             this.Controls.Add(this.lblCopyright);
             this.Controls.Add(this.txtPresentlyPlaying);
@@ -213,7 +171,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "myJukeboxMainForm";
-            this.Text = "My Juke Box v1.0";
+            this.Text = " ";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).EndInit();
@@ -232,10 +190,6 @@
         private System.Windows.Forms.TextBox txtPresentlyPlaying;
         private System.Windows.Forms.Label lblCopyright;
         private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.ListBox listBox2;
-        private System.Windows.Forms.ListBox listBox3;
-        private System.Windows.Forms.TextBox txtPlayingFilePath;
         private System.Windows.Forms.Button btnNextGenre;
         private System.Windows.Forms.Button btnPrevGenre;
         private System.Windows.Forms.ListBox lstboxPlaylist;
