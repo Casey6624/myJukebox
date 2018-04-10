@@ -59,17 +59,16 @@ namespace myJukebox
                     int tracksInGenre = Convert.ToInt16(listMediaContents[0]);
                     // then deletes the amount of tracks once it's stored to a variable 
                     listMediaContents.RemoveAt(0);
-                    for (int count2 = 0; count2 < tracksInGenre; count2++)
-                    {
+                    
                         // Adds the tracks to a list by using a get range (+1 is for the genre name)
                         newgenrelist.AddRange(listMediaContents.GetRange(0, tracksInGenre + 1));
                         //newgenrelist.InsertRange(0, listMediaContents);
                         Media_Libary.Add(newgenrelist);
-                    }
+                    
                     // Similar line of code to remove the tracks and title from the list so we can get the next genre info
                     listMediaContents.RemoveRange(0, tracksInGenre + 1);     
                 }
-                lstboxGenreList.DataSource = Media_Libary[2];
+                lstboxGenreList.DataSource = Media_Libary[0];
             }
         }
     
