@@ -179,6 +179,7 @@
             this.btnPrevGenre.TabIndex = 12;
             this.btnPrevGenre.Text = "<";
             this.btnPrevGenre.UseVisualStyleBackColor = true;
+            this.btnPrevGenre.Click += new System.EventHandler(this.btnPrevGenre_Click);
             // 
             // lstboxPlaylist
             // 
