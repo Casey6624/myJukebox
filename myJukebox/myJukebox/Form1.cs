@@ -138,6 +138,7 @@ namespace myJukebox
                 btnNextGenre.Enabled = true;
                 genreIndex++;
                 readMediaFile(genreIndex);
+                btnPrevGenre.Enabled = true;
             }
             else
             {
@@ -147,11 +148,12 @@ namespace myJukebox
 
         private void btnPrevGenre_Click(object sender, EventArgs e)
         {
-            if ( genreIndex > -1)
+            if ( genreIndex > 0)
             {
                 btnPrevGenre.Enabled = true;
                 genreIndex--;
                 readMediaFile(genreIndex);
+                btnNextGenre.Enabled = true;
             }
             else
             {
