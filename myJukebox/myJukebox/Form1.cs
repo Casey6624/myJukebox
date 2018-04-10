@@ -70,7 +70,8 @@ namespace myJukebox
                     // Similar line of code to remove the tracks and title from the list so we can get the next genre info
                     listMediaContents.RemoveRange(0, tracksInGenre + 1);     
                 }
-                lstboxGenreList.DataSource = Media_Libary[genreIndex];
+                lstboxGenreList.DataSource = Media_Libary[genreIndex].GetRange(1, Media_Libary[genreIndex].Count -1);
+
                 foreach(string title in Media_Libary[genreIndex])
                 {
                     genreTitle.Add(title);
@@ -114,7 +115,12 @@ namespace myJukebox
                 txtPresentlyPlaying.Text = trackName;
             }
         }
-         
+        // Used MSDN Microsoft Article for help https://msdn.microsoft.com/en-us/library/windows/desktop/dd562692(v=vs.85).aspx 
+        private void Player_MediaError(object pMediaObject)
+        {
+            MessageBox.Show("I'm sorry, there is an issue with that audio file. It may be corrupt or missing from the file directory.");
+            this.Close();
+        }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -133,9 +139,7 @@ namespace myJukebox
 
         private void lstboxGenreList_DoubleClick(object sender, EventArgs e)
         {
-            queueAndPlay();
-         
-            
+            queueAndPlay();    
         }
 
         private void btnNextGenre_Click(object sender, EventArgs e)
