@@ -16,7 +16,6 @@ namespace myJukebox
     {
         public int genreIndex = 0;
         string trackName = "";
-        public Timer timer1;
         // status of playing music
         bool IsPlaying = false;
         // line_of_text pulls defined which is used with the StreamReader to read the media file
@@ -34,7 +33,7 @@ namespace myJukebox
         List<string> newgenrelist = new List<string>();
         List<string> genreTitle = new List<string>();
 
-       
+
         public void readMediaFile(int genreIndex)
         {
             List<List<string>> Media_Libary = new List<List<string>>();
@@ -62,18 +61,18 @@ namespace myJukebox
                     // Code to work out the amount of tracks in the genre by reading the 2nd line after the amount of genres in total
                     int tracksInGenre = Convert.ToInt16(listMediaContents[0]);
                     // then deletes the amount of tracks once it's stored to a variable 
-                    listMediaContents.RemoveAt(0);                   
-                        // Adds the tracks to a list by using a get range (+1 is for the genre name)
-                        newgenrelist.AddRange(listMediaContents.GetRange(0, tracksInGenre + 1));
-                        //newgenrelist.InsertRange(0, listMediaContents);
-                        Media_Libary.Add(newgenrelist);
-                    
-                    // Similar line of code to remove the tracks and title from the list so we can get the next genre info
-                    listMediaContents.RemoveRange(0, tracksInGenre + 1);     
-                }
-                lstboxGenreList.DataSource = Media_Libary[genreIndex].GetRange(1, Media_Libary[genreIndex].Count -1);
+                    listMediaContents.RemoveAt(0);
+                    // Adds the tracks to a list by using a get range (+1 is for the genre name)
+                    newgenrelist.AddRange(listMediaContents.GetRange(0, tracksInGenre + 1));
+                    //newgenrelist.InsertRange(0, listMediaContents);
+                    Media_Libary.Add(newgenrelist);
 
-                foreach(string title in Media_Libary[genreIndex])
+                    // Similar line of code to remove the tracks and title from the list so we can get the next genre info
+                    listMediaContents.RemoveRange(0, tracksInGenre + 1);
+                }
+                lstboxGenreList.DataSource = Media_Libary[genreIndex].GetRange(1, Media_Libary[genreIndex].Count - 1);
+
+                foreach (string title in Media_Libary[genreIndex])
                 {
                     genreTitle.Add(title);
                     txtGenreTitle.Text = genreTitle[0];
@@ -97,59 +96,46 @@ namespace myJukebox
                 return false;
             }
         }
-        private void checkCurrentPlayStatus()
+        private bool checkCurrentPlaylistStatus()
+        {
+            if (lstboxPlaylist.Items.Count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+        public void queueAndPlay()
+        {
+            // change to true false
+            if (checkCurrentPlaylistStatus() == true && IsPlaying == false)
+            {
+                trackName = lstboxPlaylist.Items[0].ToString();
+                lstboxPlaylist.Items.RemoveAt(0);
+                string audioFilePath = Path.Combine(StrApplicationTracksPath, trackName);
+                axWindowsMediaPlayer1.URL = audioFilePath;
+                txtPresentlyPlaying.Text = trackName;
+                IsPlaying = true;
+                axWindowsMediaPlayer1.Ctlcontrols.play();
+            }
+        }
+        private void timer1_Tick(object sender, EventArgs e)
         {
             if (axWindowsMediaPlayer1.playState == WMPPlayState.wmppsPlaying)
             {
                 IsPlaying = true;
             }
-            else if (axWindowsMediaPlayer1.playState == WMPPlayState.wmppsMediaEnded)
+            else if (axWindowsMediaPlayer1.playState == WMPPlayState.wmppsStopped)
             {
-                IsPlaying = false;
-                timer1.Interval = 100;
-                timer1.Enabled = true;
+                timer1.Enabled = false;
                 queueAndPlay();
             }
         }
 
-
-        public void queueAndPlay()
-        {
-            if(queuedTracks() == true || IsPlaying == true)
-            {
-                trackName = lstboxGenreList.SelectedItem.ToString();
-                lstboxPlaylist.Items.Add(trackName);
-            }
-            else if(queuedTracks() == true && IsPlaying == false)
-            {
-                trackName = Convert.ToString(lstboxPlaylist.GetItemText(0));
-                lstboxPlaylist.Items.RemoveAt(0);
-            }
-            else
-            {
-                trackName = lstboxGenreList.SelectedItem.ToString();
-                string audioFilePath = Path.Combine(StrApplicationTracksPath, trackName);
-                axWindowsMediaPlayer1.URL = audioFilePath;
-                txtPresentlyPlaying.Text = trackName;
-            }
-        }
-        private void axWindowsMediaPlayer1_PlayStateChange(object sender, AxWMPLib._WMPOCXEvents_PlayStateChangeEvent e)
-        {
-            if ((WMPLib.WMPPlayState)e.newState == WMPLib.WMPPlayState.wmppsMediaEnded)
-            {
-                IsPlaying = false;
-                queueAndPlay();
-            }
-        }
-
-        // Used MSDN Microsoft Article for help https://msdn.microsoft.com/en-us/library/windows/desktop/dd562692(v=vs.85).aspx 
-        private void Player_MediaError(object pMediaObject)
-        {
-            MessageBox.Show("I'm sorry, there is an issue with that audio file. It may be corrupt or missing from the file directory.");
-            this.Close();
-        }
-
-            private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Assigns the aboutForm to a variable and shows the form when About Menu Item selected
             aboutForm aboutForm = new aboutForm();
@@ -166,21 +152,19 @@ namespace myJukebox
 
         private void lstboxGenreList_DoubleClick(object sender, EventArgs e)
         {
-            checkCurrentPlayStatus();
-            if(IsPlaying == true)
+            if (lstboxGenreList.Items.Count > -1)
             {
-                queueAndPlay();
+                lstboxPlaylist.Items.Add(lstboxGenreList.Items[lstboxGenreList.SelectedIndex]);
+                if (IsPlaying == false)
+                {
+                    queueAndPlay();
+                }
             }
-            else
-            {
-                queueAndPlay();
-            }
-                
         }
 
         private void btnNextGenre_Click(object sender, EventArgs e)
         {
-            if (genreIndex < int_Number_of_Genre -1)
+            if (genreIndex < int_Number_of_Genre - 1)
             {
                 btnNextGenre.Enabled = true;
                 genreIndex++;
@@ -191,12 +175,11 @@ namespace myJukebox
             else
             {
                 btnNextGenre.Enabled = false;
-            }          
+            }
         }
-
         private void btnPrevGenre_Click(object sender, EventArgs e)
         {
-            if ( genreIndex > 0)
+            if (genreIndex > 0)
             {
                 btnPrevGenre.Enabled = true;
                 genreIndex--;
@@ -207,6 +190,22 @@ namespace myJukebox
             else
             {
                 btnPrevGenre.Enabled = false;
+            }
+        }
+        private void axWindowsMediaPlayer1_PlayStateChange(object sender, AxWMPLib._WMPOCXEvents_PlayStateChangeEvent e)
+        {
+            // Got the playstates from the MSDN Article https://docs.microsoft.com/en-us/previous-versions/windows/embedded/ms930667(v=msdn.10)
+            if (e.newState == 8)
+            {
+                IsPlaying = false;
+                timer1.Interval = 100;
+                timer1.Tick += timer1_Tick;
+                timer1.Start();
+            }
+            else if (e.newState == 3)
+            {
+                IsPlaying = true;
+
             }
         }
     }

@@ -17,7 +17,7 @@ namespace myJukebox
             InitializeComponent();
         }
 
-        bool bool_Requires_Saving;
+        //bool bool_Requires_Saving;
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
@@ -27,7 +27,7 @@ namespace myJukebox
         private void btnImportFromDirectory_Click(object sender, EventArgs e)
         {
             // lets user know something has changed and needs saving
-            bool_Requires_Saving = true;
+            //bool_Requires_Saving = true;
             // Allows user to select directory for their music
             //if(folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(myJukeboxMainForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.setUpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,6 +41,7 @@
             this.btnNextGenre = new System.Windows.Forms.Button();
             this.btnPrevGenre = new System.Windows.Forms.Button();
             this.lstboxPlaylist = new System.Windows.Forms.ListBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
             this.SuspendLayout();
@@ -121,7 +123,7 @@
             this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
             this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(145, 37);
             this.axWindowsMediaPlayer1.TabIndex = 6;
-            this.axWindowsMediaPlayer1.Visible = false;
+            this.axWindowsMediaPlayer1.PlayStateChange += new AxWMPLib._WMPOCXEvents_PlayStateChangeEventHandler(this.axWindowsMediaPlayer1_PlayStateChange);
             // 
             // btnNextGenre
             // 
@@ -193,6 +195,7 @@
         private System.Windows.Forms.Button btnNextGenre;
         private System.Windows.Forms.Button btnPrevGenre;
         private System.Windows.Forms.ListBox lstboxPlaylist;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 
