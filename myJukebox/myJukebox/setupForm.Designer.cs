@@ -45,6 +45,7 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnMoveTrack = new System.Windows.Forms.Button();
             this.btnDelFromGenera = new System.Windows.Forms.Button();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.groupBoxImported.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -90,12 +91,14 @@
             // 
             // btnCopyTrack
             // 
+            this.btnCopyTrack.Enabled = false;
             this.btnCopyTrack.Location = new System.Drawing.Point(324, 75);
             this.btnCopyTrack.Name = "btnCopyTrack";
             this.btnCopyTrack.Size = new System.Drawing.Size(97, 23);
             this.btnCopyTrack.TabIndex = 1;
             this.btnCopyTrack.Text = "Copy Track >>";
             this.btnCopyTrack.UseVisualStyleBackColor = true;
+            this.btnCopyTrack.Click += new System.EventHandler(this.btnCopyTrack_Click);
             // 
             // groupBox1
             // 
@@ -130,6 +133,7 @@
             this.btnAdd.TabIndex = 5;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnNext
             // 
@@ -164,6 +168,7 @@
             // 
             this.txtGeneraTitle.Location = new System.Drawing.Point(19, 33);
             this.txtGeneraTitle.Name = "txtGeneraTitle";
+            this.txtGeneraTitle.ReadOnly = true;
             this.txtGeneraTitle.Size = new System.Drawing.Size(242, 20);
             this.txtGeneraTitle.TabIndex = 1;
             // 
@@ -196,6 +201,7 @@
             // 
             // btnMoveTrack
             // 
+            this.btnMoveTrack.Enabled = false;
             this.btnMoveTrack.Location = new System.Drawing.Point(324, 118);
             this.btnMoveTrack.Name = "btnMoveTrack";
             this.btnMoveTrack.Size = new System.Drawing.Size(97, 23);
@@ -205,6 +211,7 @@
             // 
             // btnDelFromGenera
             // 
+            this.btnDelFromGenera.Enabled = false;
             this.btnDelFromGenera.Location = new System.Drawing.Point(324, 160);
             this.btnDelFromGenera.Name = "btnDelFromGenera";
             this.btnDelFromGenera.Size = new System.Drawing.Size(97, 62);
@@ -252,5 +259,6 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnMoveTrack;
         private System.Windows.Forms.Button btnDelFromGenera;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
 }

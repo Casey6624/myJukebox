@@ -8,11 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using MyDialogs;
 
 namespace myJukebox
 {
     public partial class setupForm : Form
     {
+        public string newGenreTitle = "";
         public int genreIndex = 0;
         string trackName = "";
         // status of playing music
@@ -45,7 +47,22 @@ namespace myJukebox
 
         private void btnImportFromDirectory_Click(object sender, EventArgs e)
         {
-
+            // Tells the application that something has changed 
+            bool bool_Requires_Saving = true;
+            // Let the user select the directory the music is comming from 
+            if ( folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                // Populates the list array with all the files with the stated extension 
+                foreach (string file in Directory.EnumerateFiles(folderBrowserDialog1.SelectedPath,"*.*", SearchOption.AllDirectories).Where(s => s.EndsWith(".mp3") || s.EndsWith(".wma") || s.EndsWith(".wav") || s.EndsWith(".MP3") || s.EndsWith(".WMA") || s.EndsWith(".WAV")))
+                {
+                    lstBoxImportedTracks.Items.Add(file);
+                }
+                if (lstBoxImportedTracks.Items.Count > 0)
+                {
+                    btnCopyTrack.Enabled = true;
+                    btnMoveTrack.Enabled = true;
+                }
+            }
         }
         public void populateGenreTitleAndTracks(int genreIndex)
         {
@@ -93,6 +110,11 @@ namespace myJukebox
                 genreTitle.Clear();
             }
         }
+        public void addNewGenre()
+        {
+            newGenreTitle = My_Dialogs.InputBox("Please Enter The New Genre Title: ");
+            txtGeneraTitle.Text = newGenreTitle;
+        }
 
         private void btnPrevious_Click(object sender, EventArgs e)
         {
@@ -123,6 +145,20 @@ namespace myJukebox
             else
             {
                 btnNext.Enabled = false;
+            }
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            addNewGenre();
+        }
+
+        private void btnCopyTrack_Click(object sender, EventArgs e)
+        {
+            if(lstBoxImportedTracks.Items.Count > 0)
+            {
+                // Change this to add to listboxcurrenttracks on right hand side.
+                Media_Libary[genreIndex].Add(Convert.ToString(lstBoxImportedTracks.SelectedItem));
             }
         }
     }
