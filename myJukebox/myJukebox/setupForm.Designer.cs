@@ -70,6 +70,7 @@
             this.btnClearImportTracks.TabIndex = 2;
             this.btnClearImportTracks.Text = "Clear Import Tracks";
             this.btnClearImportTracks.UseVisualStyleBackColor = true;
+            this.btnClearImportTracks.Click += new System.EventHandler(this.btnClearImportTracks_Click);
             // 
             // btnImportFromDirectory
             // 
