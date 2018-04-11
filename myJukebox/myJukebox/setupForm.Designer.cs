@@ -139,6 +139,7 @@
             this.btnNext.TabIndex = 4;
             this.btnNext.Text = "Next >>";
             this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // btnPrevious
             // 
@@ -148,6 +149,7 @@
             this.btnPrevious.TabIndex = 3;
             this.btnPrevious.Text = "<< Previous";
             this.btnPrevious.UseVisualStyleBackColor = true;
+            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
             // 
             // lblGeneraTitle
             // 
