@@ -14,6 +14,8 @@ namespace myJukebox
 {
     public partial class setupForm : Form
     {
+        public int int_New_Number_Of_Genre;
+        public int intNumberOfNewGenresCreated = 0;
         // Tells the application that something has changed 
         public bool bool_Requires_Saving = false;
         // int to hold the new index of the new genre which will be added 
@@ -30,7 +32,9 @@ namespace myJukebox
         public string StrApplicationTracksPath = Directory.GetCurrentDirectory() + "\\Tracks\\";
         // the number of generes in the config file
         public int int_Number_of_Genre;
-        // The creation of all the lists.
+        //----------------------------------------------------------------
+        // The creation of all the lists
+        //----------------------------------------------------------------
         // List Media Contents is what the StreamReader saves each line to
         List<string> listMediaContents = new List<string>();
         // Media Libary is a 2D list with all the genres saved as lists inside
@@ -39,13 +43,15 @@ namespace myJukebox
         List<string> newgenrelist = new List<string>();
         //genre title stores the chosen genre title and tracks and selects the index 0 to give the title
         List<string> genreTitle = new List<string>();
+        //Stores all the names of the new genres to it's own list
+        List<string> newGenreTitles = new List<string>();
 
         public setupForm()
         {
             InitializeComponent();
+            // Populates the genre title textbox and current tracks listbox with parameter genreIndex (default is 0)
             populateGenreTitleAndTracks(genreIndex);
         }
-
         private void btnCancel_Click(object sender, EventArgs e)
         {
             // Checks to see if a user has created a newGenreTitle/Made changes
@@ -75,20 +81,22 @@ namespace myJukebox
                 this.Close();
             }
         }
-
         private void btnImportFromDirectory_Click(object sender, EventArgs e)
         {
-            // Let the user select the directory the music is comming from 
+            // Let the user select the directory the music is imported from 
             if ( folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 // Populates the list array with all the files with the stated extension 
                 foreach (string file in Directory.EnumerateFiles(folderBrowserDialog1.SelectedPath,"*.*", SearchOption.AllDirectories).Where(s => s.EndsWith(".mp3") || s.EndsWith(".wma") || s.EndsWith(".wav") || s.EndsWith(".MP3") || s.EndsWith(".WMA") || s.EndsWith(".WAV")))
                 {
+                    //Adds all the found track names into the imported tracks listbox
                     lstBoxImportedTracks.Items.Add(file);
                 }
                 if (lstBoxImportedTracks.Items.Count > 0)
                 {
+                    // sets bool to needs saving as changes have been made
                     bool_Requires_Saving = true;
+                    // enables both the copy and move buttons as we now have tracks to use
                     btnCopyTrack.Enabled = true;
                     btnMoveTrack.Enabled = true;
                 }
@@ -96,9 +104,9 @@ namespace myJukebox
         }
         public void populateGenreTitleAndTracks(int genreIndex)
         {
-            List<List<string>> Media_Libary = new List<List<string>>();
-
+            // StreamReader to read the file using the media path 
             StreamReader MediaFile_StreamReader = File.OpenText(StrApplicationMediaPath);
+            //line of text which is used to read each line
             line_of_text = MediaFile_StreamReader.ReadLine();
             // Read the file and store to list until line_of_text returns null (no more lines)
             while (line_of_text != null)
@@ -124,35 +132,52 @@ namespace myJukebox
                     listMediaContents.RemoveAt(0);
                     // Adds the tracks to a list by using a get range (+1 is for the genre name)
                     newgenrelist.AddRange(listMediaContents.GetRange(0, tracksInGenre + 1));
-                    //newgenrelist.InsertRange(0, listMediaContents);
+                    // Add the newly created newgenrelist to the master Media_Libary 
                     Media_Libary.Add(newgenrelist);
 
                     // Similar line of code to remove the tracks and title from the list so we can get the next genre info
                     listMediaContents.RemoveRange(0, tracksInGenre + 1);
                 }
-                // Grabs the tracks from the Media Libary list and adds them to the lstBoxCurrentTracks
-                lstBoxCurrentTracks.DataSource = Media_Libary[genreIndex].GetRange(1, Media_Libary[genreIndex].Count - 1);
-                // itterates through each list in the selected genre and saves to it's own list. Sets the first element (the title) to the genre title text
-                foreach (string title in Media_Libary[genreIndex])
-                {
-                    genreTitle.Add(title);
-                    txtGeneraTitle.Text = genreTitle[0];
-                }
-                genreTitle.Clear();
+                getTitleAndTracks();
+                int_New_Number_Of_Genre = Media_Libary.Count;
             }
+        }
+        public void getTitleAndTracks()
+        {
+            // Grabs the tracks from the Media Libary list and adds them to the lstBoxCurrentTracks
+            lstBoxCurrentTracks.DataSource = Media_Libary[genreIndex].GetRange(1, Media_Libary[genreIndex].Count - 1);
+            // itterates through each list in the selected genre and saves to it's own list. Sets the first element (the title) to the genre title text
+            foreach (string title in Media_Libary[genreIndex])
+            {
+                genreTitle.Add(title);
+                txtGeneraTitle.Text = genreTitle[0];
+            }
+            // Clears the genre list ready for the next genre is added to it, so the title can take index 0 
+            genreTitle.Clear();
         }
         public void addNewGenre()
         {
+            intNumberOfNewGenresCreated++;
             // Input box to ask for the new genre name
             newGenreTitle = My_Dialogs.InputBox("Please Enter The New Genre Title: ");
             // Checks to see if a user entered a genre, if the variable is still null it will not be ran.
             if(newGenreTitle != null)
             {
-                txtGeneraTitle.Text = newGenreTitle;
-                newGenreIndex = int_Number_of_Genre;
-                MessageBox.Show("Genre Index: " + newGenreIndex.ToString());
-                MessageBox.Show("Media Libary Count: " + Media_Libary.Count.ToString());
-                //Media_Libary[newGenreIndex].Add(newGenreTitle);
+                List<string> newGenreTitles = new List<string>();
+                newGenreTitles.Add(newGenreTitle);
+                if (intNumberOfNewGenresCreated >= 1)
+                {
+                    for (int count2 = 0; count2 < intNumberOfNewGenresCreated; count2++)
+                    {
+                        List<string> newgenrelist = new List<string>();
+                        newgenrelist.Add(newGenreTitles[count2]);
+                        // Add the newgenrelist to master Media_Libary 
+                        Media_Libary.Add(newgenrelist);
+                        int_Number_of_Genre++;
+                        intNumberOfNewGenresCreated--;
+                    }
+                    getTitleAndTracks();
+                }
             }
         }
         // Code to switch to the previous genre. This takes the index of the genre and goes back 1 index each click. 
@@ -178,7 +203,7 @@ namespace myJukebox
         //If we are on the last genre and cannot go forward anymore, the else statement disables the button.
         private void btnNext_Click(object sender, EventArgs e)
         {
-            if (genreIndex < int_Number_of_Genre - 1)
+            if (genreIndex < int_New_Number_Of_Genre - 1)
             {
                 btnNext.Enabled = true;
                 // Add 1 to the index
@@ -207,13 +232,16 @@ namespace myJukebox
                 // Change this to add to listboxcurrenttracks on right hand side.
                 string trackToAdd = Convert.ToString(lstBoxImportedTracks.SelectedItem);
                 Media_Libary[newGenreIndex].Add(trackToAdd);
-
             }
         }
 
         private void btnClearImportTracks_Click(object sender, EventArgs e)
         {
+            // Clears any tracks which are currently inside the imported listbox
             lstBoxImportedTracks.Items.Clear();
+            // Disables both the copy and move buttons as there is nothing to copy or move now.
+            btnCopyTrack.Enabled = false;
+            btnMoveTrack.Enabled = false;
         }
     }
 }

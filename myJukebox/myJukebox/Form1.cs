@@ -28,8 +28,9 @@ namespace myJukebox
         public string StrApplicationTracksPath = Directory.GetCurrentDirectory() + "\\Tracks\\";
         // the number of generes in the config file (the first line of the file)
         public int int_Number_of_Genre;
+        //---------------------------------------------------
         // Creation of all the lists used in my project:
-        //----------------------------------------------
+        //---------------------------------------------------
         // stores all the lines of the StreamReader in a list
         List<string> listMediaContents = new List<string>();
         // stores all the genre lists in a 2D list of lists
@@ -105,10 +106,12 @@ namespace myJukebox
             // Checks to see if we have any items queued in the playlist and returns true or false accordingly
             if (lstboxPlaylist.Items.Count > 0)
             {
+                // Items queued
                 return true;
             }
             else
             {
+                // No Items Queued
                 return false;
             }
         }
